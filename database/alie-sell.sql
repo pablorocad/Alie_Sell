@@ -1,12 +1,12 @@
 create table CLASE_CLIENTE(
-ID_CLASE_CLIENTE int primary key,
+ID_CLASE_CLIENTE int generated always as identity primary key,
 TIPO varchar(3),
 CREDITO int
 );
 
 
 create TABLE USUARIO(
-ID_USUARIO INT PRIMARY KEY,
+ID_USUARIO INT generated always as identity PRIMARY KEY,
 NOMBRE VARCHAR(15) NOT NULL,
 APELLIDO VARCHAR(15) NOT NULL,
 CONTRASENIA VARCHAR(25) NOT NULL,
@@ -28,7 +28,7 @@ constraint FK_CLASE_CLIENTE foreign key(CLASE_CLIENTE) references CLASE_CLIENTE(
 
 
 create table BITACORA_ADMIN(
-ID_ACCION int primary key,
+ID_ACCION int generated always as identity primary key,
 ACCION varchar(250) not null,
 fecha_accion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 ID_USUARIO int not null,
@@ -36,7 +36,7 @@ constraint FK_ID_USUARIO_BITACORA foreign key(ID_USUARIO) references USUARIO(ID_
 );
 
 create table CHAT_AYUDA(
-ID_CHAT_AYUDA int primary key,
+ID_CHAT_AYUDA int generated always as identity primary key,
 ID_USUARIO int not null,
 ID_SERVIDOR int not null,
 TEMA varchar(200) not null,
@@ -48,7 +48,7 @@ constraint FK_ID_SERVIDOR_CHAT foreign key(ID_SERVIDOR) references USUARIO(ID_US
 );
 
 create table MENSAJE_CHAT(
-ID_MENSAJE int primary key,
+ID_MENSAJE int generated always as identity primary key,
 CONTENIDO varchar(250) not null,
 FECHA_MENSAJE TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 ID_CHAT_AYUDA int not null,
@@ -57,7 +57,7 @@ constraint FK_ID_CHAT_AYUDA foreign key(ID_CHAT_AYUDA) references CHAT_AYUDA(ID_
 );
 
 create table CARRO_COMPRA(
-ID_CARRO int primary key,
+ID_CARRO int generated always as identity primary key,
 TOTAL int not null,
 ID_USUARIO int not null,
 
@@ -65,7 +65,7 @@ constraint FK_ID_USUARIO_CARRO_COMPRA foreign key(ID_USUARIO) references USUARIO
 );
 
 create table CATEGORIA(
-ID_CATEGORIA int primary key,
+ID_CATEGORIA int generated always as identity primary key,
 NOMBRE varchar(20) not null,
 DESCRIPCION varchar(200),
 ID_CATEGORIA_PADRE int,
@@ -74,7 +74,7 @@ constraint FK_ID_CATEGORIA_PADRE foreign key(ID_CATEGORIA_PADRE) references CATE
 );
 
 create table PRODUCTO(
-ID_PRODUCTO int primary key,
+ID_PRODUCTO int generated always as identity primary key,
 IMAGEN varchar(200) not null,
 DESCRIPCION varchar(200) not null,
 PRECIO int not null,
@@ -86,7 +86,7 @@ constraint FK_ID_CATEGORIA foreign key(ID_CATEGORIA) references CATEGORIA(ID_CAT
 );
 
 create table COLOR(
-ID_COLOR int primary key,
+ID_COLOR int generated always as identity primary key,
 NOMBRE varchar(20)
 );
 
@@ -102,7 +102,7 @@ PRIMARY KEY(ID_COLOR,ID_PRODUCTO)
 
 
 create table COMENTARIO(
-ID_COMENTARIO int primary key,
+ID_COMENTARIO int generated always as identity primary key,
 NOMBRE_AUTOR varchar(15),
 FECHA_PUBLICACION TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 TITULO varchar(20) not null,
@@ -123,7 +123,6 @@ constraint FK_ID_CARRO_COMPRA_PROCOMP foreign key(ID_CARRO_COMPRA) references CA
 
 primary key(ID_PRODUCTO,ID_CARRO_COMPRA)
 );
-
 
 
 
