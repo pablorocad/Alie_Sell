@@ -1,5 +1,7 @@
 import { Router } from 'express';
 
+import {userController} from '../controllers/userController';
+
 class UserRoutes{
     public router: Router = Router();
 
@@ -8,7 +10,12 @@ class UserRoutes{
     }
 
     config(): void{
-        this.router.get('/',(req,res) => res.send('Hola user'));
+        this.router.get('/',userController.listUsers);
+        this.router.get('/:id',userController.getUser);
+
+        this.router.post('/',userController.create);
+        this.router.delete('/:id',userController.deleteUser);
+        this.router.put('/:id',userController.putUser);
     }
 }
 

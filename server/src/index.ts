@@ -18,14 +18,14 @@ class Server{
     config(): void {
         this.app.set('port', process.env.PORT || 8200);
         this.app.use(morgan('dev'));
+        this.app.use(cors());
+        this.app.use(express.json());//Aceptar formatos JSON
+        this.app.use(express.urlencoded({extended: false}));
     }
 
     routes(): void {
         this.app.use('/',indexRoutes);
         this.app.use('/api/user',userRoutes);
-        this.app.use(cors());
-        this.app.use(express.json());//Aceptar formatos JSON
-        this.app.use(express.urlencoded({extended: false}));
     }
 
     start(): void {
